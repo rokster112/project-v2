@@ -35,7 +35,6 @@ export default function Home() {
           className="relative group border-2 border-emerald-600 w-36 h-12 rounded-[8px] flex justify-center items-center font-semibold self-center"
           href="https://www.linkedin.com/in/rokas-arlauskas/"
           target="_blank"
-          // transition-all bg-[length:0%_100%] bg-gradient-to-r from-black to-green-600 duration-300 ease-in-out hover:bg-[length:100%_100%]
         >
           <span className="z-2 transition ease-in-out duration-300 delay-100 group-hover:text-black group-active:text-black font-semibold">
             Contact Me
@@ -45,14 +44,14 @@ export default function Home() {
       </div>
       <div className="flex flex-row w-40 justify-evenly">
         <a
-          href=""
+          href="https://www.linkedin.com/in/rokas-arlauskas/"
           target="_blank"
           className="hover:text-green-500 cursor-pointer"
         >
           <Linkedin size={32} className="rounded-[8px]" />
         </a>
         <a
-          href=""
+          href="https://github.com/rokster112"
           target="_blank"
           className="hover:text-green-500 cursor-pointer"
         >
