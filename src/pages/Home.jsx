@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="text-white flex flex-col justify-center items-center relative h-screen">
       <Background />
-      <h1 className="text-[40px] xs:text-[48px] sm:text-[68px] font-bold text-center w-auto mx-6">
+      <h1 className="text-[40px] xs:text-[48px] sm:text-[55px] md:text-[68px] font-bold text-center w-auto mx-6">
         Crafting <span className="text-green-600">Web Solutions</span> with{" "}
         <span className="text-blue-500">React</span> &{" "}
         <span className="text-orange-400">Passion</span>
@@ -46,20 +46,20 @@ export default function Home() {
         <a
           href="https://www.linkedin.com/in/rokas-arlauskas/"
           target="_blank"
-          className="hover:text-green-500 cursor-pointer"
+          className="hover:text-green-500 active:text-green-500 cursor-pointer"
         >
           <Linkedin size={32} className="rounded-[8px]" />
         </a>
         <a
           href="https://github.com/rokster112"
           target="_blank"
-          className="hover:text-green-500 cursor-pointer"
+          className="hover:text-green-500 active:text-green-500 cursor-pointer"
         >
           <Github size={32} className="rounded-[8px]" />
         </a>
         <a
           href="mailto:rokas.arlauskass@gmail.com"
-          className="hover:text-green-500 cursor-pointer"
+          className="hover:text-green-500 active:text-green-500 cursor-pointer"
         >
           <Mail size={32} className="rounded-[8px]" />
         </a>
