@@ -18,7 +18,7 @@ export default function QuoteFetch() {
         return;
       }
 
-      const res = await axios.get("http://api.quotable.io/random");
+      const res = await axios.get("https://api.quotable.io/random");
       if (res.status !== 200) throw new Error("Failed to get a quote");
 
       const data = { quote: res.data, quoteDate: today };
