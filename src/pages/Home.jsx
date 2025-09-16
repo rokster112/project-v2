@@ -11,8 +11,9 @@ export default function Home() {
         <span className="text-orange-400">Passion</span>
       </h1>
       <h2 className="mt-8 mx-6 text-center text-[22px] xs:text-[26px] sm:w-140 md:w-180 lg:w-240">
-        Hi, I'm <span className="text-green-600">Rokas Arlauskas</span> - a MERN
-        stack developer with a passion for clean code and purposeful design.{" "}
+        Hi, I'm <span className="text-green-600">Rokas Arlauskas</span> - a
+        Full-Stack stack developer with a passion for clean code and purposeful
+        design.{" "}
         <span className="hidden sm:inline">
           Blending a scientific mindset with creative problem-solving, I build
           sleek, user-focused web apps that are as functional as they are

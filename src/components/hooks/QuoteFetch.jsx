@@ -1,45 +1,38 @@
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useState } from "react";
 
 export default function QuoteFetch() {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
   const [quote, setQuote] = useState(null);
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        setLoading(true);
-        const today = new Date().toISOString().split("T")[0];
-        const localStorageQuote = localStorage.getItem("quote");
-        if (localStorageQuote) {
-          const { data, quoteDate } = JSON.parse(localStorageQuote);
-          if (quoteDate !== today) {
-            localStorage.removeItem("quote");
-          } else {
-            setQuote(data);
-            return;
-          }
-        }
-        const res = await fetch("https://api.quotable.io/random");
-        if (!res.ok) {
-          throw new Error("Failed to get a quote");
-        }
-        const data = await res.json();
-        localStorage.setItem(
-          "quote",
-          JSON.stringify({ data, quoteDate: today })
-        );
-        setQuote(data);
+  const fetchQuote = async () => {
+    setLoading(true);
+    try {
+      const today = new Date().toISOString().split("T")[0];
+
+      const stored = JSON.parse(localStorage.getItem("quoteData"));
+      if (stored?.quote && stored.quoteDate === today) {
+        setQuote(stored.quote);
         setErr(null);
-      } catch (error) {
-        console.error(error);
-        setErr(error);
-      } finally {
-        setLoading(false);
+        return;
       }
+
+      const res = await axios.get("http://api.quotable.io/random");
+      if (res.status !== 200) throw new Error("Failed to get a quote");
+
+      const data = { quote: res.data, quoteDate: today };
+      localStorage.setItem("quoteData", JSON.stringify(data));
+      setQuote(res.data);
+      setErr(null);
+    } catch (error) {
+      console.error(error);
+      setErr(error);
+    } finally {
+      setLoading(false);
     }
-    getData();
-  }, []);
+  };
+
   if (loading) {
     return (
       <div className="flex z-2 justify-center items-center">
@@ -55,14 +48,17 @@ export default function QuoteFetch() {
       </h3>
     );
   }
-  console.log("quote =>", quote);
 
-  return (
-    quote && (
-      <div>
-        <h4>{quote.content}</h4>
-        <p>{quote.author}</p>
-      </div>
-    )
+  return quote ? (
+    <div>
+      <h4 className="mt-4">
+        {quote.content} -{" "}
+        <span className="text-green-600 font-semibold">{quote.author}</span>
+      </h4>
+    </div>
+  ) : (
+    <button className="bg-green-600 p-2 rounded-md" onClick={fetchQuote}>
+      Get quote
+    </button>
   );
 }
