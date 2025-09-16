@@ -3,7 +3,7 @@ import { Download, Linkedin, Github, Mail } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="text-white flex flex-col items-center overflow-auto justify-center relative h-screen">
+    <div className="text-white flex flex-col items-center overflow-hidden justify-center relative h-screen">
       <Background />
       <h1 className="text-[40px] xs:text-[48px] sm:text-[55px] md:text-[68px] font-bold text-center w-auto mx-6">
         Crafting <span className="text-green-600">Web Solutions</span> with{" "}
