@@ -1,7 +1,5 @@
 // netlify/functions/quote.js
 
-import fetch from "node-fetch";
-
 export async function handler() {
   try {
     const res = await fetch("https://api.quotable.io/random");
