@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+const API = import.meta.env.VITE_API_URL;
 
 export default function QuoteFetch() {
   const [loading, setLoading] = useState(false);
@@ -18,7 +19,7 @@ export default function QuoteFetch() {
         return;
       }
 
-      const res = await axios.get("https://api.quotable.io/random");
+      const res = await axios.get(API);
       if (res.status !== 200) throw new Error("Failed to get a quote");
 
       const data = { quote: res.data, quoteDate: today };
