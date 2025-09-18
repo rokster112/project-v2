@@ -1,4 +1,4 @@
-import { values } from "../data/values";
+import { aboutValues } from "../data/values";
 import QuoteFetch from "../components/hooks/QuoteFetch";
 import { FaLaptopCode } from "react-icons/fa";
 import { GiGraduateCap } from "react-icons/gi";
@@ -202,7 +202,7 @@ export default function About() {
               Things I <span className="text-green-600">Value</span>
             </h2>
             <div className="absolute w-1 h-[calc(100%-76px)] top-[76px] left-1/2 z-10 transform -translate-x-[50%] opacity-40 bg-green-600"></div>
-            {values.map((val, index, arr) => (
+            {aboutValues.map((val, index, arr) => (
               <div
                 className={`inView opacity-0 transition-opacity duration-800 relative view flex flex-col bg-slate-800 z-20 md:w-[calc(50%-16px)] rounded-md ${
                   index % 2 === 0
