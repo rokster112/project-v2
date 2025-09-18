@@ -12,7 +12,7 @@ export default function Footer() {
   ];
 
   return (
-    <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full min-w-[330px] max-w-[450px] mb-4">
+    <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full min-w-[330px] max-w-[450px] mb-4 z-50">
       <div className="group rounded-md border-1 border-slate-700 transition duration-300 xs:opacity-50 hover:scale-105 hover:opacity-100 text-white flex flex-row justify-between items-center p-1 mx-2 sm:p-4 ">
         {iconArray.map((item, index) => (
           <FooterIcons
