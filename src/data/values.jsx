@@ -12,7 +12,7 @@ export const values = [
     icon: <Brain />,
     title: "Curiosity",
     description:
-      "I love digging into how things work — whether it's a new tool, framework, or feature.",
+      "I love digging into how things work. Whether it's a new tool, framework, or feature.",
   },
   {
     icon: <Lightbulb />,
