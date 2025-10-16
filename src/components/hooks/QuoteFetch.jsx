@@ -13,7 +13,7 @@ export default function QuoteFetch() {
     if (data) {
       setTimeout(() => {
         setWrap(true);
-      }, 400);
+      }, 250);
     }
   }
 
@@ -70,7 +70,11 @@ export default function QuoteFetch() {
   }
 
   return (
-    <div className="relative flex flex-col items-center w-full h-full">
+    <div
+      className={`relative flex flex-col ${
+        wrap ? "items-start" : "items-center"
+      } w-full h-full`}
+    >
       <h4
         className={`text-start mt-4 transition-all duration-1000 ease-in-out min-w-[345px] max-w-[900px] ${
           quote ? "w-full opacity-100" : "w-0 opacity-0"

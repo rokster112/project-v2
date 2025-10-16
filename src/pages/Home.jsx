@@ -24,7 +24,7 @@ export default function Home() {
         <a
           className="group relative w-44 h-12 mr-4 rounded-[8px] flex flex-row items-center justify-evenly bg-green-600 font-semibold text-black "
           target="__blank"
-          href="https://docs.google.com/document/d/1TesHgCogURFerdNRXJqCg5_gBqVi9SwElPcADPpWwPI/edit?usp=sharing"
+          href="https://docs.google.com/document/d/1aXD0wLusZUFJzhsRHHNwCfJOrbKfVhRv8zQDinl6Z5M/edit?tab=t.0"
         >
           <span className="z-0 bg-green-800 rounded-[8px] absolute h-full w-0 transition-all duration-300 ease-in-out group-hover:w-full group-active:w-full"></span>
           <span className="z-2">

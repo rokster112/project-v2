@@ -4,6 +4,9 @@ import { FaCode, FaLaptopCode } from "react-icons/fa";
 import { IoIosColorPalette } from "react-icons/io";
 import { GrDatabase } from "react-icons/gr";
 import { VscTools } from "react-icons/vsc";
+import Snake from "../components/skills/Snake";
+import CustomCursor from "../components/CustomCursor";
+import CategoryBtns from "../components/CategoryBtns";
 
 export default function Skills() {
   const [category, setCategory] = useState(true);
@@ -69,22 +72,11 @@ export default function Skills() {
           isCli ? "opacity-0 h-0" : "opacity-100 h-full"
         }`}
       >
-        <div className="flex flex-row items-center justify-center gap-6 mb-10 flex-wrap">
-          {buttons.map((btn) => (
-            <button
-              key={btn.title}
-              onClick={() => handleCategoryClick(btn.value)}
-              className={`cursor-pointer transition-all duration-400 ease-in-out flex flex-row-reverse justify-center items-center w-34 rounded-md p-4 ${
-                btn.value === category
-                  ? "bg-green-600"
-                  : "bg-slate-800 hover:bg-slate-700"
-              }`}
-            >
-              <h4 className="font-semibold">{btn.title}</h4>
-              <div className="text-green-800 pr-2">{btn.icon}</div>
-            </button>
-          ))}
-        </div>
+        <CategoryBtns
+          buttons={buttons}
+          handleCategoryClick={handleCategoryClick}
+          category={category}
+        />
         <div className="md:min-w-[710px] w-full max-w-[900px] grid md:grid-cols-3 gap-6 m-auto">
           {skillsValues
             .filter((skill) =>
@@ -105,7 +97,9 @@ export default function Skills() {
                 <div className="relative w-full h-2">
                   <span className="absolute -bottom-13 h-full w-full bg-gray-700 rounded-lg"></span>
                   <span
-                    className="absolute -bottom-13 h-2 bg-green-600 rounded-lg z-10 transition-all duration-400 ease-in-out"
+                    className={`absolute -bottom-13 h-2 bg-green-600 rounded-lg z-10 ${
+                      refresh ? "transition-all duration-400 ease-in-out" : ""
+                    }`}
                     style={{
                       width: refresh ? `${Number(skill.score)}%` : "0px",
                     }}
@@ -114,7 +108,7 @@ export default function Skills() {
               </div>
             ))}
         </div>
-        <h1 className="pb-10">Some other content for later</h1>
+        <Snake />
       </div>
       <h1
         className={`transition-all duration-400 ease-in-out ${

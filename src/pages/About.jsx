@@ -4,6 +4,7 @@ import { FaLaptopCode } from "react-icons/fa";
 import { GiGraduateCap } from "react-icons/gi";
 import profilePicture from "../assets/profile-pic.jpeg";
 import { useEffect } from "react";
+import CustomCursor from "../components/CustomCursor";
 
 export default function About() {
   useEffect(() => {
