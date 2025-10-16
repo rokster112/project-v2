@@ -8,7 +8,7 @@ import Snake from "../components/skills/Snake";
 import CustomCursor from "../components/CustomCursor";
 import CategoryBtns from "../components/CategoryBtns";
 
-export default function Skills() {
+export default function Skills({ start, setStart }) {
   const [category, setCategory] = useState(true);
   const [isCli, setIsCli] = useState(false);
   const [refresh, setRefresh] = useState(false);
@@ -39,7 +39,7 @@ export default function Skills() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white px-4 flex flex-col overflow-hidden gap-10 pb-[90px]">
+    <div className="min-h-screen bg-black text-white px-4 flex flex-col overflow-hidden gap-10 pb-[120px] xs:pb-[90px]">
       <h1 className="text-[40px] xs:text-[48px] sm:text-[55px] md:text-[68px] font-bold text-center w-auto pt-10">
         My <span className="text-green-600">Skills</span>
       </h1>
@@ -108,7 +108,7 @@ export default function Skills() {
               </div>
             ))}
         </div>
-        <Snake />
+        <Snake start={start} setStart={setStart} />
       </div>
       <h1
         className={`transition-all duration-400 ease-in-out ${

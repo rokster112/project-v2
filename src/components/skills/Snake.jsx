@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 
-export default function Snake() {
+export default function Snake({ start, setStart }) {
   const cellSize = 12;
   const cols = useRef(0);
   const rows = useRef(0);
@@ -13,7 +13,6 @@ export default function Snake() {
   const directionLocked = useRef(false);
   const [currentPosition, setCurrentPosition] = useState([]);
   const [grid, setGrid] = useState([]);
-  const [start, setStart] = useState(false);
   const [movementSpeed, setMovementSpeed] = useState(100);
   const [food, setFood] = useState(null);
 
@@ -96,7 +95,6 @@ export default function Snake() {
   }, [start]);
 
   if (currentPosition[0] === food) {
-    console.log("YES");
     setFoodPosition(grid);
     snakeLength.current += 1;
   }
@@ -114,25 +112,24 @@ export default function Snake() {
     setFood(null);
     direction.current = "LEFT";
     snakeLength.current = 3;
-    return setStart(false);
+    return setTimeout(() => setStart(false), 0);
   }
 
+  function handleDirection(e, phoneNav = null) {
+    const key = phoneNav ? phoneNav : e.key;
+    if (directionLocked.current) return;
+
+    if (key === "w" && direction.current !== "DOWN") direction.current = "UP";
+    else if (key === "a" && direction.current !== "RIGHT")
+      direction.current = "LEFT";
+    else if (key === "s" && direction.current !== "UP")
+      direction.current = "DOWN";
+    else if (key === "d" && direction.current !== "LEFT")
+      direction.current = "RIGHT";
+
+    directionLocked.current = true;
+  }
   useEffect(() => {
-    function handleDirection(e) {
-      if (directionLocked.current) return;
-
-      if (e.key === "w" && direction.current !== "DOWN")
-        direction.current = "UP";
-      else if (e.key === "a" && direction.current !== "RIGHT")
-        direction.current = "LEFT";
-      else if (e.key === "s" && direction.current !== "UP")
-        direction.current = "DOWN";
-      else if (e.key === "d" && direction.current !== "LEFT")
-        direction.current = "RIGHT";
-
-      directionLocked.current = true;
-    }
-
     window.addEventListener("keydown", handleDirection);
     return () => window.removeEventListener("keydown", handleDirection);
   }, []);
@@ -144,30 +141,32 @@ export default function Snake() {
         <span className="text-green-600"> React</span>!
       </h3>
       <div className="relative bg-[#8fcc10] flex flex-col p-2 rounded-md items-center justify-center w-fit h-fit">
-        <button
-          onClick={() => (direction.current = "UP")}
-          className="absolute -top-[34px]  text-white"
-        >
-          <FaArrowAltCircleUp size={32} />
-        </button>
-        <button
-          onClick={() => (direction.current = "RIGHT")}
-          className="absolute top-1/2 -right-[34px] rotate-90 text-white"
-        >
-          <FaArrowAltCircleUp size={32} />
-        </button>
-        <button
-          onClick={() => (direction.current = "DOWN")}
-          className="absolute -bottom-[34px] rotate-180 text-white"
-        >
-          <FaArrowAltCircleUp size={32} />
-        </button>
-        <button
-          onClick={() => (direction.current = "LEFT")}
-          className="absolute top-1/2 -left-[34px] rotate-270 text-white"
-        >
-          <FaArrowAltCircleUp size={32} />
-        </button>
+        <div className="xs:hidden absolute left-[calc(50%-16px)] -bottom-[50px]">
+          <button
+            onClick={(e) => handleDirection(e, "w")}
+            className="absolute -top-[40px]  text-white"
+          >
+            <FaArrowAltCircleUp size={40} />
+          </button>
+          <button
+            onClick={(e) => handleDirection(e, "d")}
+            className="absolute top-1/2 -right-[84px] rotate-90 text-white"
+          >
+            <FaArrowAltCircleUp size={40} />
+          </button>
+          <button
+            onClick={(e) => handleDirection(e, "s")}
+            className="absolute -bottom-[80px] rotate-180 text-white"
+          >
+            <FaArrowAltCircleUp size={40} />
+          </button>
+          <button
+            onClick={(e) => handleDirection(e, "a")}
+            className="absolute top-1/2 -left-[44px] rotate-270 text-white"
+          >
+            <FaArrowAltCircleUp size={40} />
+          </button>
+        </div>
         <div className="bg-[#8fcc10] border-b-3 mb-4 pb-1 border-black text-2xl text-black font-extrabold w-full">
           <p className="font-snake">{snakeLength.current - 3}</p>
         </div>
@@ -209,15 +208,11 @@ export default function Snake() {
                 ></div>
               );
             })}
-            <button
-              className="bg-red-600 p-4"
-              onClick={() => (snakeLength.current += 1)}
-            >
-              Click
-            </button>
-            <button className="bg-red-600 p-4" onClick={() => setStart(true)}>
-              Start
-            </button>
+            {!start && (
+              <button className="bg-red-600 p-4" onClick={() => setStart(true)}>
+                Start
+              </button>
+            )}
           </div>
         </div>
       </div>
