@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { FaArrowAltCircleUp } from "react-icons/fa";
 
 export default function Snake() {
   const cellSize = 12;
@@ -137,12 +138,36 @@ export default function Snake() {
   }, []);
 
   return (
-    <div className="md:min-w-[710px] w-full h-fit max-w-[900px] m-auto">
+    <div className="flex flex-col items-center md:min-w-[710px] w-full h-fit max-w-[900px] m-auto">
       <h3 className="text-center text-2xl font-bold py-10">
         Want to take a break? Play a quick game I built in{" "}
         <span className="text-green-600"> React</span>!
       </h3>
-      <div className="bg-[#8fcc10] flex flex-col p-2 rounded-md items-center justify-center w-fit h-fit">
+      <div className="relative bg-[#8fcc10] flex flex-col p-2 rounded-md items-center justify-center w-fit h-fit">
+        <button
+          onClick={() => (direction.current = "UP")}
+          className="absolute -top-[34px]  text-white"
+        >
+          <FaArrowAltCircleUp size={32} />
+        </button>
+        <button
+          onClick={() => (direction.current = "RIGHT")}
+          className="absolute top-1/2 -right-[34px] rotate-90 text-white"
+        >
+          <FaArrowAltCircleUp size={32} />
+        </button>
+        <button
+          onClick={() => (direction.current = "DOWN")}
+          className="absolute -bottom-[34px] rotate-180 text-white"
+        >
+          <FaArrowAltCircleUp size={32} />
+        </button>
+        <button
+          onClick={() => (direction.current = "LEFT")}
+          className="absolute top-1/2 -left-[34px] rotate-270 text-white"
+        >
+          <FaArrowAltCircleUp size={32} />
+        </button>
         <div className="bg-[#8fcc10] border-b-3 mb-4 pb-1 border-black text-2xl text-black font-extrabold w-full">
           <p className="font-snake">{snakeLength.current - 3}</p>
         </div>

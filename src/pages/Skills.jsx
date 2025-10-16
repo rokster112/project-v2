@@ -39,7 +39,7 @@ export default function Skills() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white px-4 flex flex-col overflow-hidden gap-10">
+    <div className="min-h-screen bg-black text-white px-4 flex flex-col overflow-hidden gap-10 pb-[90px]">
       <h1 className="text-[40px] xs:text-[48px] sm:text-[55px] md:text-[68px] font-bold text-center w-auto pt-10">
         My <span className="text-green-600">Skills</span>
       </h1>
