@@ -43,7 +43,7 @@ export default function Skills({ start, setStart }) {
     <div
       className={`min-h-screen bg-black text-white ${
         !isCli ? "px-4" : ""
-      } overflow-hidden pb-[120px] xs:pb-[90px]`}
+      } overflow-hidden pb-[140px] xs:pb-[90px]`}
     >
       <div className="gap-10 flex flex-col">
         <h1 className="text-[40px] xs:text-[48px] sm:text-[55px] md:text-[68px] font-bold text-center w-auto pt-10">

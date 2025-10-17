@@ -173,7 +173,7 @@ export default function Snake({ start, setStart }) {
         <div className="box-border border-3 border-black h-fit w-fit ">
           <div
             ref={containerRef}
-            className="flex flex-row flex-wrap bg-[#8fcc10] h-[240px] xs:h-[348px] md:h-[444px] lg:h-[600px] w-[240px] xs:w-[348px] md:w-[444px] lg:w-[600px]"
+            className="flex flex-row flex-wrap bg-[#8fcc10] h-[314px] xs:h-[348px] md:h-[444px] lg:h-[600px] w-[314px] xs:w-[348px] md:w-[444px] lg:w-[600px]"
           >
             {grid.map((d, i) => {
               let isHead = d === currentPosition[0];
