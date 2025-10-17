@@ -2,6 +2,7 @@ import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { FaSquareGithub, FaLinkedin } from "react-icons/fa6";
 import { budget, contactInfo, timeline } from "../data/values";
+import { HandleChange } from "../components/hooks/HandleChange";
 const template = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const service = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const key = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
@@ -17,11 +18,6 @@ export default function ContactMe() {
     budget: "",
     timeline: "",
   });
-
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -66,7 +62,7 @@ export default function ContactMe() {
                 value={formData.name}
                 placeholder="Your name"
                 required
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => HandleChange(e, setFormData)}
               />
             </label>
             <label className="flex flex-col gap-2 font-semibold">
@@ -77,7 +73,7 @@ export default function ContactMe() {
                 name="company"
                 value={formData.company}
                 placeholder="Your company"
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => HandleChange(e, setFormData)}
               />
             </label>
             <label className="flex flex-col gap-2 font-semibold">
@@ -91,7 +87,7 @@ export default function ContactMe() {
                 value={formData.email}
                 placeholder="your@email.com"
                 required
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => HandleChange(e, setFormData)}
               />
             </label>
             <label className="flex flex-col gap-2 font-semibold">
@@ -103,7 +99,7 @@ export default function ContactMe() {
                 name="number"
                 value={formData.number}
                 placeholder="Your phone number"
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => HandleChange(e, setFormData)}
               />
             </label>
             <label className="flex flex-col col-span-2 gap-2 font-semibold">
@@ -114,7 +110,7 @@ export default function ContactMe() {
                 required
                 name="description"
                 value={formData.description}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => HandleChange(e, setFormData)}
                 className="bg-slate-600 rounded-md p-3 border-2 border-slate-500 active:border-green-600 focus:border-green-600 outline-0 min-h-[280px]"
                 placeholder="Tell me about your project, goals, and requirements..."
               ></textarea>
@@ -127,7 +123,7 @@ export default function ContactMe() {
                 className="bg-slate-600 pl-3 py-3 border-2 border-slate-500 rounded-md outline-green-600"
                 name="budget"
                 value={formData.budget}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => HandleChange(e, setFormData)}
               >
                 <option value={""}>Select a budget range</option>
                 {budget.map((b) => (
@@ -142,7 +138,7 @@ export default function ContactMe() {
               <select
                 className="bg-slate-600 pl-3 py-3 border-2 border-slate-500 rounded-md outline-green-600"
                 name="timeline"
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => HandleChange(e, setFormData)}
                 value={formData.timeline}
               >
                 <option value={""}>Select a timeline</option>

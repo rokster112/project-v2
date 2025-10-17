@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -6,4 +7,5 @@
   --breakpoint-2xl: 100rem;
   --breakpoint-3xl: 120rem;
   --font-snake: "VT323", monospace;
+  --font-winky: "Winky Sans", sans-serif;
 }

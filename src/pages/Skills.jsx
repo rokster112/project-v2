@@ -7,6 +7,7 @@ import { VscTools } from "react-icons/vsc";
 import Snake from "../components/skills/Snake";
 import CustomCursor from "../components/CustomCursor";
 import CategoryBtns from "../components/CategoryBtns";
+import CLI from "../components/skills/CLI";
 
 export default function Skills({ start, setStart }) {
   const [category, setCategory] = useState(true);
@@ -39,83 +40,91 @@ export default function Skills({ start, setStart }) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white px-4 flex flex-col overflow-hidden gap-10 pb-[120px] xs:pb-[90px]">
-      <h1 className="text-[40px] xs:text-[48px] sm:text-[55px] md:text-[68px] font-bold text-center w-auto pt-10">
-        My <span className="text-green-600">Skills</span>
-      </h1>
-      <div className="flex flex-row justify-center items-center font-bold text-lg">
-        <button
-          className={`cursor-pointer transition-all duration-400 ease-in-out flex flex-row-reverse justify-center items-center w-24 rounded-tl-xl rounded-bl-xl p-4 ${
-            !isCli ? "bg-green-600" : "bg-slate-800 hover:bg-slate-700"
-          }`}
-          onClick={() => {
-            setIsCli(false);
-            setRefresh(true);
-          }}
-        >
-          GUI
-        </button>
-        <button
-          className={`cursor-pointer transition-all duration-400 ease-in-out flex flex-row-reverse justify-center items-center w-24 rounded-tr-xl rounded-br-xl p-4 ${
-            isCli ? "bg-green-600" : "bg-slate-800 hover:bg-slate-700"
-          }`}
-          onClick={() => {
-            setIsCli(true);
-            setRefresh(false);
-          }}
-        >
-          CLI
-        </button>
-      </div>
-      <div
-        className={`transition-all duration-400 ease-in-out ${
-          isCli ? "opacity-0 h-0" : "opacity-100 h-full"
-        }`}
-      >
-        <CategoryBtns
-          buttons={buttons}
-          handleCategoryClick={handleCategoryClick}
-          category={category}
-        />
-        <div className="md:min-w-[710px] w-full max-w-[900px] grid md:grid-cols-3 gap-6 m-auto">
-          {skillsValues
-            .filter((skill) =>
-              category === true ? skill : skill.category === category
-            )
-            .map((skill) => (
-              <div
-                key={skill.title}
-                className="flex flex-col border-1 border-slate-700 h-30 w-full rounded-md bg-slate-800 text-white p-4 transition-all duration-400 ease-in-out hover:border-green-600"
-              >
-                <div className="flex flex-row justify-between">
-                  <div className="flex flex-row items-center">
-                    <img className="h-8 w-8 mr-2" src={skill.icon} />
-                    <h3 className="text-2xl">{skill.title}</h3>
-                  </div>
-                  <p className="text-green-600 font-bold">{skill.score}%</p>
-                </div>
-                <div className="relative w-full h-2">
-                  <span className="absolute -bottom-13 h-full w-full bg-gray-700 rounded-lg"></span>
-                  <span
-                    className={`absolute -bottom-13 h-2 bg-green-600 rounded-lg z-10 ${
-                      refresh ? "transition-all duration-400 ease-in-out" : ""
-                    }`}
-                    style={{
-                      width: refresh ? `${Number(skill.score)}%` : "0px",
-                    }}
-                  ></span>
-                </div>
-              </div>
-            ))}
+    <div
+      className={`min-h-screen bg-black text-white ${
+        !isCli ? "px-4" : ""
+      } overflow-hidden pb-[120px] xs:pb-[90px]`}
+    >
+      <div className="gap-10 flex flex-col">
+        <h1 className="text-[40px] xs:text-[48px] sm:text-[55px] md:text-[68px] font-bold text-center w-auto pt-10">
+          My <span className="text-green-600">Skills</span>
+        </h1>
+        <div className="flex flex-row justify-center items-center font-bold text-lg">
+          <button
+            className={`cursor-pointer transition-all duration-400 ease-in-out flex flex-row-reverse justify-center items-center w-24 rounded-tl-xl rounded-bl-xl p-4 ${
+              !isCli ? "bg-green-600" : "bg-slate-800 hover:bg-slate-700"
+            }`}
+            onClick={() => {
+              setIsCli(false);
+              setRefresh(true);
+            }}
+          >
+            GUI
+          </button>
+          <button
+            className={`cursor-pointer transition-all duration-400 ease-in-out flex flex-row-reverse justify-center items-center w-24 rounded-tr-xl rounded-br-xl p-4 ${
+              isCli ? "bg-green-600" : "bg-slate-800 hover:bg-slate-700"
+            }`}
+            onClick={() => {
+              setIsCli(true);
+              setRefresh(false);
+            }}
+          >
+            CLI
+          </button>
         </div>
-        <Snake start={start} setStart={setStart} />
+        <div
+          className={`transition-all duration-400 ease-in-out ${
+            isCli ? "opacity-0 h-0 w-0" : "opacity-100 h-full w-full"
+          }`}
+        >
+          <CategoryBtns
+            buttons={buttons}
+            handleCategoryClick={handleCategoryClick}
+            category={category}
+          />
+          <div className="md:min-w-[710px] w-full max-w-[900px] grid md:grid-cols-3 gap-6 m-auto">
+            {skillsValues
+              .filter((skill) =>
+                category === true ? skill : skill.category === category
+              )
+              .map((skill) => (
+                <div
+                  key={skill.title}
+                  className="flex flex-col border-1 border-slate-700 h-30 w-full rounded-md bg-slate-800 text-white p-4 transition-all duration-400 ease-in-out hover:border-green-600"
+                >
+                  <div className="flex flex-row justify-between">
+                    <div className="flex flex-row items-center">
+                      <img className="h-8 w-8 mr-2" src={skill.icon} />
+                      <h3 className="text-2xl">{skill.title}</h3>
+                    </div>
+                    <p className="text-green-600 font-bold">{skill.score}%</p>
+                  </div>
+                  <div className="relative w-full h-2">
+                    <span className="absolute -bottom-13 h-full w-full bg-gray-700 rounded-lg"></span>
+                    <span
+                      className={`absolute -bottom-13 h-2 bg-green-700 rounded-lg z-10 ${
+                        refresh
+                          ? "transition-all duration-1000 ease-in-out"
+                          : ""
+                      }`}
+                      style={{
+                        width: refresh ? `${Number(skill.score)}%` : "0px",
+                      }}
+                    ></span>
+                  </div>
+                </div>
+              ))}
+          </div>
+          <Snake start={start} setStart={setStart} />
+        </div>
       </div>
       <h1
         className={`transition-all duration-400 ease-in-out ${
-          isCli ? "opacity-100 h-full" : "opacity-0 h-0"
+          isCli ? "opacity-100 h-full w-full z-50" : "opacity-0 h-0 z-0"
         }`}
       >
-        CLI
+        {isCli ? <CLI isCli={isCli} setIsCli={setIsCli} /> : null}
       </h1>
     </div>
   );
