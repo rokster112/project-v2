@@ -41,12 +41,15 @@ export default function CLIOutput({
     if (allowedLength > command.length) {
       setState(`Missing arguments. Type "help" for usage details.`, "error");
       return false;
-    } else if (allowedLength < command.length) {
+    } else if (allowedLength === 1 && allowedLength < command.length) {
       return setState(
         `Command "${commandArr[0]}" doesn't take any arguments.`,
         "error"
       );
+    } else if (allowedLength > 1 && allowedLength < command.length) {
+      return setState("Too many arguments.", "error");
     }
+
     return true;
   }
 
@@ -61,25 +64,17 @@ export default function CLIOutput({
   function findSkill() {
     const command = formatCommand();
     if (!commandLength(command, 2)) return;
-    //! I dont think i even need to check "rokas" here anymore
-    //! Also, need to re-write the error message, to somehow have the
-    //! CommandLength function handle it.
-    if (command[0] === "rokas") {
-      if (command.length > 2)
-        return setState("Please search for one skill at a time.", "error");
-      const skill = skillsValues.find(
-        (s) => s.title.toLowerCase() === command[1].toLowerCase()
+    const skill = skillsValues.find(
+      (s) => s.title.toLowerCase() === command[1].toLowerCase()
+    );
+    if (!skill) {
+      return setState(
+        `No, Rokas doesn't have "${command[1]}" listed in his skills.`,
+        "error"
       );
-      if (!skill) {
-        return setState(
-          `No, Rokas doesn't have "${command[1]}" listed in his skills.`,
-          "error"
-        );
-      } else {
-        return setState(skill, "skill");
-      }
+    } else {
+      return setState(skill, "skill");
     }
-    return;
   }
 
   function changeTheme() {
@@ -139,9 +134,6 @@ export default function CLIOutput({
       setLoadedBg(true);
     }, 400);
     return;
-    // setTimeout(() => {
-    //   setLoading(false);
-    // }, 1500);
   }
 
   function handleSubmit(e) {
@@ -161,8 +153,8 @@ export default function CLIOutput({
     setCommandHistory((prev) => [...prev, formData.input]);
     const command = formatCommand();
     setFormData((prev) => ({ ...prev, input: "" }));
-    return commands[command[0]]
-      ? commands[command[0]]()
+    return commands[command[0].toLowerCase()]
+      ? commands[command[0].toLowerCase()]()
       : setState(
           "Command not recognized. Type 'help' for available commands.",
           "error"
@@ -245,7 +237,7 @@ export default function CLIOutput({
           </div>
         );
       })}
-      <form className="pt-2" onSubmit={(e) => handleSubmit(e)}>
+      <form className="pt-2 pb-15 sm:pb-0" onSubmit={(e) => handleSubmit(e)}>
         <label className="text-green-400 flex gap-2">
           {formData.label}{" "}
           <input

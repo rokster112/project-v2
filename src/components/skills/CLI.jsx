@@ -63,7 +63,7 @@ export default function CLI({ isCli, setIsCli, setRefresh, setStart, start }) {
   return (
     <>
       <div
-        className={`flex min-h-full relative flex-col items-center gap-10 ${
+        className={`flex min-h-full -top-5 sm:top-0 relative flex-col items-center gap-10 ${
           isCli ? "z-50" : "z-0"
         } ${!loadedBg ? "opacity-100 z-50" : "opacity-0 z-0 w-0"}`}
       >
