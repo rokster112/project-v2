@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { FaArrowAltCircleUp } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
 
-export default function Snake({ start, setStart }) {
+export default function Snake({ start, setStart, closeSnakeGame }) {
   const cellSize = 12;
   const cols = useRef(0);
   const rows = useRef(0);
   const lastUpdate = useRef(0);
+  const highScore = useRef(0);
   const containerRef = useRef(null);
   const snakeLength = useRef(3);
   const direction = useRef("LEFT");
@@ -108,6 +110,9 @@ export default function Snake({ start, setStart }) {
     (direction.current === "RIGHT" &&
       (currentPosition[0] - 1) % cols.current === 0)
   ) {
+    highScore.current < snakeLength.current - 3
+      ? (highScore.current = snakeLength.current - 3)
+      : highScore.current;
     setCurrentPosition([]);
     setFood(null);
     direction.current = "LEFT";
@@ -136,10 +141,6 @@ export default function Snake({ start, setStart }) {
 
   return (
     <div className="flex flex-col items-center md:min-w-[710px] w-full h-fit max-w-[900px] m-auto">
-      <h3 className="text-center text-2xl font-bold py-10">
-        Want to take a break? Play a quick game I built in{" "}
-        <span className="text-green-600"> React</span>!
-      </h3>
       <div className="relative bg-[#8fcc10] flex flex-col p-2 rounded-md items-center justify-center w-fit h-fit">
         <div className="xs:hidden absolute left-[calc(50%-16px)] -bottom-[50px]">
           <button
@@ -173,7 +174,7 @@ export default function Snake({ start, setStart }) {
         <div className="box-border border-3 border-black h-fit w-fit ">
           <div
             ref={containerRef}
-            className="flex flex-row flex-wrap bg-[#8fcc10] h-[314px] xs:h-[348px] md:h-[444px] lg:h-[600px] w-[314px] xs:w-[348px] md:w-[444px] lg:w-[600px]"
+            className="flex flex-row flex-wrap bg-[#8fcc10] h-[314px] xs:h-[348px] md:h-[444px] w-[314px] xs:w-[348px] md:w-[444px]"
           >
             {grid.map((d, i) => {
               let isHead = d === currentPosition[0];
@@ -209,10 +210,26 @@ export default function Snake({ start, setStart }) {
               );
             })}
             {!start && (
-              <button className="bg-red-600 p-4" onClick={() => setStart(true)}>
+              <button
+                className="font-winky text-black text-4xl absolute top-1/2 left-1/2 cursor-pointer transition-all duration-400 ease-in-out hover:scale-115"
+                onClick={() => setStart(true)}
+                style={{ transform: "translateX(-50%)" }}
+              >
                 Start
               </button>
             )}
+            <button
+              onClick={closeSnakeGame}
+              className="absolute top-2 right-2 z-100 text-black cursor-pointer"
+            >
+              <IoMdClose size={30} />
+            </button>
+            <p
+              style={{ transform: "translateX(50%)" }}
+              className="absolute font-snake text-2xl top-2 right-1/2 z-100 text-black cursor-pointer"
+            >
+              High Score: <span className="">{highScore.current}</span>
+            </p>
           </div>
         </div>
       </div>

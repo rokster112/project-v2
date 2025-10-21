@@ -45,7 +45,7 @@ export default function Interests() {
           </h3>
           <h5 className="text-lg italic">
             “Basketball taught me that teamwork and communication matter more
-            than individual skill.„
+            than individual skill„
           </h5>
           <p className="">
             I’ve been playing basketball since I was 11, competing at school,
@@ -65,8 +65,8 @@ export default function Interests() {
             What <span className="text-white">Nature</span> Taught Me
           </h3>
           <h5 className="text-lg italic">
-            "Nature taught me to stay grounded and appreciate the world beyond
-            myself."
+            “Nature taught me to stay grounded and appreciate the world beyond
+            myself„
           </h5>
           <p>
             Spending time in nature helps me disconnect from daily distractions

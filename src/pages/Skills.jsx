@@ -116,7 +116,6 @@ export default function Skills({ start, setStart }) {
                 </div>
               ))}
           </div>
-          <Snake start={start} setStart={setStart} />
         </div>
       </div>
       <h1
@@ -124,7 +123,15 @@ export default function Skills({ start, setStart }) {
           isCli ? "opacity-100 h-full w-full z-50" : "opacity-0 h-0 z-0"
         }`}
       >
-        {isCli ? <CLI isCli={isCli} setIsCli={setIsCli} /> : null}
+        {isCli ? (
+          <CLI
+            isCli={isCli}
+            setIsCli={setIsCli}
+            setRefresh={setRefresh}
+            setStart={setStart}
+            start={start}
+          />
+        ) : null}
       </h1>
     </div>
   );

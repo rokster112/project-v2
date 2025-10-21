@@ -88,6 +88,37 @@ export const aboutValues = [
   },
 ];
 
+export const commandDisplay = [
+  {
+    name: "rokas [skillname]",
+    description: " - Check if Rokas knows a specific skill",
+  },
+  {
+    name: "list skills",
+    description: " - List all available skills",
+  },
+  {
+    name: "compare [skill1] [skill2]...",
+    description: " - Compare multiple skills",
+  },
+  {
+    name: "theme [name]",
+    description: " - Change terminal theme (dark/light)",
+  },
+  {
+    name: "clear",
+    description: " - Clear the terminal (alias: cls)",
+  },
+  {
+    name: "help",
+    description: " - Show this help message (alias: ?)",
+  },
+  {
+    name: "play snake",
+    description: " - Play snake game",
+  },
+];
+
 export const skillsValues = [
   { icon: axios, title: "Axios", score: "85", category: "Tool" },
   { icon: cSharp, title: "C#", score: "55", category: "Language" },
