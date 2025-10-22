@@ -68,7 +68,7 @@ export default function DefaultCarousel({ content }) {
         <FaAngleRight size={75} />
       </button>
 
-      <div className="flex flex-row items-center justify-center gap-4 absolute bottom-5 left-0 right-0">
+      <div className="flex flex-row items-center justify-center gap-3 absolute bottom-5 left-0 right-0">
         {content.map((_, i) => (
           <p
             key={i}

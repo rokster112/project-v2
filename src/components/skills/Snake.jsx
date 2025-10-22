@@ -142,7 +142,7 @@ export default function Snake({ start, setStart, closeSnakeGame }) {
   return (
     <div className="flex flex-col items-center md:min-w-[710px] w-full h-fit max-w-[900px] m-auto">
       <div className="relative bg-[#8fcc10] flex flex-col p-2 rounded-md items-center justify-center w-fit h-fit">
-        <div className="xs:hidden absolute left-[calc(50%-16px)] -bottom-[50px]">
+        <div className="md:hidden absolute mb-[7px] left-[calc(50%-16px)] -bottom-[50px]">
           <button
             onClick={(e) => handleDirection(e, "w")}
             className="absolute -top-[40px]  text-white"

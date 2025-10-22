@@ -21,6 +21,8 @@ export default function CLIOutput({
   });
   const [content, setContent] = useState([]);
   const [commandHistory, setCommandHistory] = useState([]);
+  const [commandPosition, setCommandPosition] = useState(0);
+  // console.log(commandPosition);
 
   function filterArray(arr, condition) {
     return arr ? arr.filter((a) => a.category === condition) : [];
@@ -56,7 +58,7 @@ export default function CLIOutput({
   function help() {
     const command = formatCommand();
     if (!commandLength(command, 1)) return;
-    if (command[0] === "help" || command[0] === "?")
+    if (command[0].toLowerCase() === "help" || command[0] === "?")
       return setState(commandDisplay, "help");
     return;
   }
@@ -86,7 +88,7 @@ export default function CLIOutput({
     ) {
       return setState(`Theme "${command[1]}" doesn't exist.`, "error");
     }
-    setIsLight(command[1] === "light" ? true : false);
+    setIsLight(command[1].toLowerCase() === "light" ? true : false);
   }
 
   function listSkills() {
@@ -151,6 +153,8 @@ export default function CLIOutput({
     };
     setState(`${formData.label} ${formData.input}`);
     setCommandHistory((prev) => [...prev, formData.input]);
+    const historyLength = commandHistory.length + 1;
+    setCommandPosition(historyLength);
     const command = formatCommand();
     setFormData((prev) => ({ ...prev, input: "" }));
     return commands[command[0].toLowerCase()]
@@ -161,11 +165,37 @@ export default function CLIOutput({
         );
   }
 
+  function commandHistoryNav(e) {
+    if (e.key === "ArrowUp" && commandPosition > 0) {
+      setCommandPosition((prev) => {
+        const newPos = prev - 1;
+        setFormData((fd) => ({
+          ...fd,
+          input: commandHistory[newPos] || "",
+        }));
+        return newPos;
+      });
+      e.preventDefault();
+    }
+
+    if (e.key === "ArrowDown" && commandPosition < commandHistory.length) {
+      setCommandPosition((prev) => {
+        const newPos = prev + 1;
+        setFormData((fd) => ({
+          ...fd,
+          input: commandHistory[newPos] || "",
+        }));
+        return newPos;
+      });
+      e.preventDefault();
+    }
+  }
+
   return (
     <div
       className={`p-4 ${showUp ? "block" : "hidden"}
       ${minimized ? "w-0" : "transition-all duration-400 ease-in-out w-full"} ${
-        expanded ? "h-full pb-10" : "h-95"
+        expanded ? "h-[90%] pb-10" : "h-95"
       }
       font-winky relative overflow-auto`}
     >
@@ -233,21 +263,33 @@ export default function CLIOutput({
             {c?.compare && (
               <CompareSkills compare={c.compare} expanded={expanded} />
             )}
-            {<p>{c?.loading}</p>}
+            {
+              <p className={`${isLight ? "text-black" : "text-white"}`}>
+                {c?.loading}
+              </p>
+            }
           </div>
         );
       })}
-      <form className="pt-2 pb-15 sm:pb-0" onSubmit={(e) => handleSubmit(e)}>
+      <form
+        autoComplete="off"
+        className="pt-2 pb-15 sm:pb-0"
+        onSubmit={(e) => handleSubmit(e)}
+      >
         <label className="text-green-400 flex gap-2">
           {formData.label}{" "}
           <input
             ref={inputRef}
             className={`${
               isLight ? "text-black" : "text-white"
-            } outline-0 w-full`}
+            } outline-0 w-full terminal`}
             name="input"
             value={formData.input}
-            onChange={(e) => HandleChange(e, setFormData)}
+            // onChange={(e) => commandHistoryNav(e)}
+            onKeyDown={commandHistoryNav}
+            onChange={(e) =>
+              setFormData((fd) => ({ ...fd, input: e.target.value }))
+            }
           />
         </label>
       </form>

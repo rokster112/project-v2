@@ -11,7 +11,7 @@ import { useState } from "react";
 export default function App() {
   const [start, setStart] = useState(false);
   return (
-    <div className="h-screen">
+    <div className="h-[100dvh]">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
