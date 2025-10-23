@@ -28,18 +28,14 @@ export default function CLI({ isCli, setStart, start, closeCli }) {
     });
   }
   useEffect(() => {
-    const inputFocus = setTimeout(() => {
-      if (isCli && !loadedBg) inputRef.current.focus();
-    }, 400);
-
     const showBg = setTimeout(() => {
       if (loadedBg) {
         setLoadedGame(true);
       }
     }, 2000);
 
-    return () => clearTimeout(inputFocus, showBg);
-  }, [isCli, loadedBg]);
+    return () => clearTimeout(showBg);
+  }, [loadedBg]);
 
   function minimize() {
     setWindowState((prev) => {
@@ -74,7 +70,6 @@ export default function CLI({ isCli, setStart, start, closeCli }) {
           >
             <div
               style={{ transform: "translate(-50%, 0%)" }}
-              onClick={() => inputRef.current?.focus()}
               className={`transition-[width, height] duration-400 ease-in-out rounded-lg box-border border-1 absolute left-1/2 ${
                 isLight
                   ? "border-gray-300 bg-white"

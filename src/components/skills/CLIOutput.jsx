@@ -193,6 +193,7 @@ export default function CLIOutput({
 
   return (
     <div
+      onClick={() => inputRef.current?.focus()}
       className={`p-4 ${showUp ? "block" : "hidden"}
       ${minimized ? "w-0" : "transition-all duration-400 ease-in-out w-full"} ${
         expanded ? "h-[90%] pb-10" : "h-95"

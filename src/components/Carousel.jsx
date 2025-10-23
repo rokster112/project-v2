@@ -6,6 +6,14 @@ export default function DefaultCarousel({ content }) {
   const [prevPosition, setPrevPosition] = useState(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
+  useEffect(() => {
+    content.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      img.decode?.();
+    });
+  }, [content]);
+
   function changeSlide(newIndex) {
     if (isTransitioning) return;
     setIsTransitioning(true);
@@ -38,12 +46,16 @@ export default function DefaultCarousel({ content }) {
       {prevPosition !== null && (
         <img
           key={prevPosition}
+          loading="eager"
+          decoding="sync"
           src={content[prevPosition]}
           className="absolute inset-0 p-1  w-full h-full object-fill opacity-0 transition-opacity duration-500"
         />
       )}
       <img
         key={currentPosition}
+        loading="eager"
+        decoding="sync"
         src={content[currentPosition]}
         className={`hover:scale-105 transition-all duration-400 absolute inset-0 p-1 w-full h-full object-fill ${
           isTransitioning
