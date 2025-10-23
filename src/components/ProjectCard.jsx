@@ -10,6 +10,8 @@ export default function ProjectCard({ p, activeProject, setActiveProject }) {
         <img
           className="relative top-0 w-full h-[300px] rounded-t-lg"
           src={p.image}
+          loading="eager"
+          decoding="sync"
         />
         <p className="absolute top-0 right-0 rounded-tr-lg px-2 py-1 bg-green-600 font-semibold">
           {p.type}

@@ -19,6 +19,14 @@ export default function Projects() {
     }
   }, [activeProject]);
 
+  useEffect(() => {
+    projectList.forEach((p) => {
+      const img = new Image();
+      img.src = p.image;
+      img.decode?.();
+    });
+  }, []);
+
   const projectRefs = useRef({});
 
   const handleCloseProject = () => {
